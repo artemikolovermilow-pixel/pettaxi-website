@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Taxi 33 - Безопасные и комфортные перевозки ваших питомцев</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #5D9C59;
+            --primary-light: #C7E8CA;
+            --primary-dark: #4A7C59;
+            --accent: #FFB6C1;
+            --text: #333333;
+            --text-light: #666666;
+            --background: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><g fill="white"><path d="M30,30 Q50,20 70,30 T90,30 Q70,40 50,30 T10,30 Q30,20 50,30 T30,30"/><circle cx="20" cy="20" r="5"/><circle cx="80" cy="20" r="5"/></g></svg>');
+            background-size: 200px;
+        }
+
+        .logo {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .tagline {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Секции */
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            font-weight: 600;
+        }
+
+        /* О нас */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .guarantee {
+            background: var(--primary-light);
+            padding: 30px;
+            border-radius: var(--radius);
+            border-left: 6px solid var(--primary);
+            margin-top: 30px;
+        }
+
+        .guarantee p {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+
+        .about-image {
+            background: linear-gradient(45deg, var(--primary-light), var(--accent));
+            height: 300px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: var(--primary);
+        }
+
+        /* Услуги и преимущества */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: var(--primary-light);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Контакты */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        .phone {
+            display: block;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 12px 20px;
+            background: var(--primary-light);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .phone:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .contact-details {
+            margin: 25px 0;
+        }
+
+        .contact-details p {
+            margin: 12px 0;
+            color: var(--text-light);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .contact-image {
+            background: linear-gradient(45deg, var(--primary-light), var(--accent));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: var(--primary);
+            min-height: 300px;
+        }
+
+        /* Подвал */
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-tagline {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Навигация (простая) */
+        .nav-placeholder {
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="fade-in">
+        <div class="nav-placeholder"></div>
+        <div class="logo">Pet Taxi 33</div>
+        <p class="tagline">Ваш питомец в надёжных и заботливых руках. Безопасно. Комфортно. С любовью.</p>
+    </header>
+
+    <!-- Основное содержимое -->
+    <div class="container">
+        
+        <!-- О нас -->
+        <section id="about" class="fade-in">
+            <h2>О нашей службе</h2>
+            <div class="about-content">
+                <div>
+                    <p class="about-text">
+                        Мы понимаем, что поездка для вашего питомца — это стресс. Поэтому в Pet Taxi 33 мы создали сервис, где на первом месте стоит <strong>безопасность, комфорт и доброе отношение</strong>. 
+                    </p>
+                    <p class="about-text">
+                        Наши водители — это не просто профессионалы, а настоящие любители животных, которые окружат вашего хвостатого друга заботой в дороге.
+                    </p>
+                    <div class="guarantee">
+                        <p>«Мы относимся к каждой собаке, кошке или другому питомцу так, как хотели бы, чтобы относились к нашему собственному»</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-paw"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Услуги -->
+        <section id="services" class="fade-in">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-paw"></i>
+                    <h3>Перевозка животных</h3>
+                    <p>Безопасная доставка собак, кошек и других питомцев по городу и области в комфортных условиях</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clinic-medical"></i>
+                    <h3>Поездка к ветеринару</h3>
+                    <p>Срочная или плановая доставка в ветеринарную клинику. Помощь с переноской и сопровождением</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Трансфер из питомника</h3>
+                    <p>Заберём вашего нового друга из питомника или приюта и бережно привезём к вам домой</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>В аэропорт / на вокзал</h3>
+                    <p>Поможем с транспортировкой при длительных путешествиях, соблюдая все правила перевозки</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section id="advantages" class="fade-in">
+            <h2>Почему выбирают нас?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>С любовью и заботой</h3>
+                    <p>Мы терпеливы и ласковы с каждым пассажиром. Создаём спокойную атмосферу в дороге</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Полная безопасность</h3>
+                    <p>Используем специальные переноски, ремни безопасности и клетки. Все автомобили оборудованы</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Чистота и гигиена</h3>
+                    <p>Машина проходит санитарную обработку после каждой поездки. Всегда есть вода и средства ухода</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Всегда вовремя</h3>
+                    <p>Пунктуальность — наш принцип. Мы ценим ваше время и приезжаем строго по договорённости</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts" class="fade-in">
+            <h2>Свяжитесь с нами</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Готовы к поездке?</h3>
+                    <p>Звоните нам или пишите в мессенджеры!</p>
+                    
+                    <a href="tel:+79607259889" class="phone">
+                        <i class="fas fa-phone"></i> +7 (960) 725-98-89
+                    </a>
+                    
+                    <div class="contact-details">
+                        <p><i class="fas fa-clock"></i> Круглосуточно, 7 дней в неделю</p>
+                        <p><i class="fas fa-envelope"></i> Email: alexanderermilow@gmail.com</p>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="https://wa.me/79607259889">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="https://t.me/pettaxi33">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="https://vk.com/pettaxi33">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-image">
+                    <i class="fas fa-dog"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Pet Taxi 33</div>
+            <p class="footer-tagline">Безопасные и комфортные перевозки ваших питомцев</p>
+            <p class="copyright">&copy; 2025 Pet Taxi 33. С заботой о ваших питомцах.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простой скрипт для анимации появления элементов при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        // Применяем анимацию ко всем секциям
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
