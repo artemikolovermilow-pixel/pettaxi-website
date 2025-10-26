@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pettaxi33.ru/sitemap.xml
